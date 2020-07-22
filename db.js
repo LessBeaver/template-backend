@@ -7,14 +7,14 @@ const config = process.env.NODE_ENV === 'test'
     port: process.env.DB_PORT_TEST || '3308',
     user: process.env.DB_USER_TEST || 'root',
     password: process.env.DB_PASS_TEST || 'root',
-    database: process.env.DB_NAME_TEST || 'sample_db_test',
+    database: process.env.DB_NAME_TEST || 'portfolio',
     connectionLimit: 10,
   } : {
     host: process.env.DB_HOST || 'localhost',
     port: process.env.DB_PORT || '3306',
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PASS || 'root',
-    database: process.env.DB_NAME || 'sample_db',
+    database: process.env.DB_NAME || 'portfolio',
     connectionLimit: 10,
   };
 
