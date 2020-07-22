@@ -37,17 +37,17 @@ router.get('/:id', (req, res) => {
 
 router.put('/:id', (req, res) => {
   const { body: formData } = req;
-  const idConso = req.params.id;
+  const idAdmin = req.params.id;
   try {
     const query = 'UPDATE Admin SET ? WHERE `id_admin` = ?';
-    connection.query(query, [formData, idConso], (error) => {
+    connection.query(query, [formData, idAdmin], (error) => {
       if (error) {
         res.status(500).json({
           error: 'error',
           sql: 'Our server encountered an error performing the request',
         });
       } else {
-        connection.query('SELECT * FROM Admin WHERE id_admin = ?', idConso, (err, admin) => {
+        connection.query('SELECT * FROM Admin WHERE id_admin = ?', idAdmin, (err, admin) => {
           if (err) {
             res.status(404);
           } else {
