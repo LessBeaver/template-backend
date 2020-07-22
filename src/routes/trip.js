@@ -48,7 +48,7 @@ router.get('/:id', (req, res) => {
   const { id } = req.params;
   try {
     connection.query(
-      'SELECT * FROM Trip WHERE `id_trip`= ?',
+      'SELECT * FROM Trip WHERE `name`= ?',
       id,
       (error, results) => {
         if (error) {
