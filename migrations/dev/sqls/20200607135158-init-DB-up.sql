@@ -42,56 +42,54 @@ LOCK TABLES `Admin` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Category`
+-- Table structure for table `Photo`
 --
 
-DROP TABLE IF EXISTS `Category`;
+DROP TABLE IF EXISTS `Photo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Category` (
-  `id_category` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Photo` (
+  `id_photo` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(126) NOT NULL,
   `picture_url` longtext NOT NULL,
-  `Theme_id_theme` int(11) NOT NULL,
-  `Admin_id_admin` int(11) NOT NULL,
-  PRIMARY KEY (`id_category`,`Admin_id_admin`),
-  KEY `fk_Category_Theme_idx` (`Theme_id_theme`),
-  KEY `fk_Category_Admin1_idx` (`Admin_id_admin`),
-  CONSTRAINT `fk_Category_Admin1` FOREIGN KEY (`Admin_id_admin`) REFERENCES `Admin` (`id_admin`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_Category_Theme` FOREIGN KEY (`Theme_id_theme`) REFERENCES `Theme` (`id_theme`) ON DELETE CASCADE ON UPDATE CASCADE
+  `id_trip` int(11) NOT NULL,
+  PRIMARY KEY (`id_photo`,`id_trip`),
+  KEY `fk_Photo_Trip_idx` (`id_trip`),
+  CONSTRAINT `fk_Photo_Trip` FOREIGN KEY (`id_trip`) REFERENCES `Trip` (`id_trip`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Category`
+-- Dumping data for table `Photo`
 --
 
-LOCK TABLES `Category` WRITE;
-/*!40000 ALTER TABLE `Category` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Category` ENABLE KEYS */;
+LOCK TABLES `Photo` WRITE;
+/*!40000 ALTER TABLE `Photo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Photo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Theme`
+-- Table structure for table `Trip`
 --
 
-DROP TABLE IF EXISTS `Theme`;
+DROP TABLE IF EXISTS `Trip`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Theme` (
-  `id_theme` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(256) NOT NULL,
-  PRIMARY KEY (`id_theme`)
+CREATE TABLE `Trip` (
+  `id_trip` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(126) NOT NULL,
+  `picture_url` longtext NOT NULL,
+  PRIMARY KEY (`id_trip`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Theme`
+-- Dumping data for table `Trip`
 --
 
-LOCK TABLES `Theme` WRITE;
-/*!40000 ALTER TABLE `Theme` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Theme` ENABLE KEYS */;
+LOCK TABLES `Trip` WRITE;
+/*!40000 ALTER TABLE `Trip` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Trip` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -103,9 +101,8 @@ DROP TABLE IF EXISTS `User`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `User` (
   `id_user` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
-  `username` varchar(60) NOT NULL,
-  `email` varchar(126) NOT NULL,
+  `username` varchar(126) NOT NULL,
+  `email` varchar(300) NOT NULL,
   `password` varchar(126) NOT NULL,
   PRIMARY KEY (`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -129,4 +126,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-22 11:36:43
+-- Dump completed on 2020-07-22 12:14:42
