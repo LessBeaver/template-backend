@@ -14,7 +14,7 @@ router.get('/:id', (req, res) => {
   const { id } = req.params;
   try {
     connection.query(
-      'SELECT * from User WHERE `id_user`= ?',
+      'SELECT * FROM User WHERE `id_user`= ?',
       id,
       (error, results) => {
         if (error) {
