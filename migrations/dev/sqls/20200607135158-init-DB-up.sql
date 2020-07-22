@@ -55,7 +55,7 @@ CREATE TABLE `Photo` (
   `id_trip` int(11) NOT NULL,
   PRIMARY KEY (`id_photo`,`id_trip`),
   KEY `fk_Photo_Trip_idx` (`id_trip`),
-  CONSTRAINT `fk_Photo_Trip` FOREIGN KEY (`id_trip`) REFERENCES `Trip` (`id_trip`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_Photo_Trip` FOREIGN KEY (`id_trip`) REFERENCES `Trip` (`id_trip`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -126,4 +126,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-22 12:14:42
+-- Dump completed on 2020-07-22 15:22:28

@@ -7,6 +7,7 @@ const register = require('./routes/register');
 const administrator = require('./routes/administrator');
 const user = require('./routes/user');
 const trip = require('./routes/trip');
+const photo = require('./routes/photo');
 
 const app = express();
 const PORT = process.env.NODE_ENV === 'test' ? 4001 : 4000;
@@ -20,6 +21,7 @@ app.use('/register', register);
 app.use('/administrator', administrator);
 app.use('/user', user);
 app.use('/trip', trip);
+app.use('/photo', photo);
 
 const server = app.listen(PORT, (err) => {
   if (err) {
