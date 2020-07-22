@@ -69,6 +69,28 @@ router.get('/:id', (req, res) => {
   }
 });
 
+router.get('/:idTrip', (req, res) => {
+  const { idTrip } = req.params;
+  const query = 'SELECT * FROM Photo WHERE Photo.id_trip = ?';
+  try {
+    connection.query(query, [idTrip], (error, results) => {
+      if (error) {
+        res.status(500).json({
+          status: 'error',
+          errorMessage: 'Our server encountered an error performing the request',
+        });
+      } else {
+        res.status(200).json(results);
+      }
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: 'error',
+      errorMessage: 'Our server encountered an error',
+    });
+  }
+});
+
 router.put('/:id', (req, res) => {
   const { body: formData } = req;
   const idPhoto = req.params.id;
