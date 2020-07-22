@@ -39,4 +39,35 @@ router.post('/admin', async (req, res) => {
   }
 });
 
+router.post('/user', async (req, res) => {
+    const { password } = req.body;
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hash = bcrypt.hashSync(password, salt);
+    const inscData = {
+      ...req.body,
+      password: hash,
+    };
+    try {
+      const { username } = req.body;
+      const users = await queryAsync('SELECT * FROM User WHERE username = ?', username);
+      if (users[0]) {
+        return res.status(409).json({
+          status: 'error',
+          errorMessage: "L'utilisateur existe déjà",
+        });
+      }
+      const query = 'INSERT INTO User SET ?';
+      const result = await queryAsync(query, inscData);
+      return res.status(201).json({
+        id_user: result.insertId,
+        ...inscData,
+      });
+    } catch (err) {
+      return res.status(500).json({
+        status: 'error',
+        errorMessage: 'Problème lors de la création du compte',
+      });
+    }
+});
+
 module.exports = router;
