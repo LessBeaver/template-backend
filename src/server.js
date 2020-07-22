@@ -1,6 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
+const admin = require('./routes/administrator');
+const signin = require('./routes/signin');
+const register = require('./routes/register');
 
 const app = express();
 const PORT = process.env.NODE_ENV === 'test' ? 4001 : 4000;
@@ -8,6 +11,9 @@ const PORT = process.env.NODE_ENV === 'test' ? 4001 : 4000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
+app.use('/admin', admin);
+app.use('/signin', signin);
+app.use('/register', register);
 
 const server = app.listen(PORT, (err) => {
   if (err) {
