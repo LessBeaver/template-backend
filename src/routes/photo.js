@@ -38,6 +38,41 @@ router.post('/', (req, res) => {
     }
 });
 
+/* router.post('/:idTrip', (req, res) => {
+  const { body } = req;
+  const { id_photo: idPhoto } = req.params;
+  const { id_trip: idTrip } = req.params;
+  try {
+    const query = `INSERT INTO Photo SET ??, id_photo=? AND id_trip=?`;
+    connection.query(query, [body, idPhoto, idTrip], (error, results) => {
+      if (error) {
+        res.status(500).json({
+          status: error,
+          errorMessage: 'Our server encountered an error performing the request',
+        });
+      } else {
+        connection.query(
+          `SELECT * FROM Photo WHERE Photo.id_trip = ?`, (err, tripObj) => {
+            if (err) {
+              res.status(500).json({
+                status: err,
+                errorMessage: 'Our server encountered an error',
+              });
+            } else {
+              res.status(201).json(tripObj[0]);
+            }
+          },
+        );
+      }
+    })
+  } catch (err) {
+    res.status(500).json({
+      status: 'error',
+      errorMessage: 'Catch, Our server encountered an error',
+    });
+  }
+}); */
+
 router.get('/', (req, res) => {
   connection.query('SELECT * FROM Photo', (error, results) => {
     res.status(200).json(results);
@@ -46,34 +81,9 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  try {
-    connection.query(
-      'SELECT * FROM Photo WHERE `id_photo`= ?',
-      id,
-      (error, results) => {
-        if (error) {
-          res.status(404).json({
-            status: 'error',
-            errorMessage: 'Our server encountered an error performing the request',
-          });
-        } else {
-          res.status(200).json(results[0]);
-        }
-      },
-    );
-  } catch (err) {
-    res.status(500).json({
-      status: 'error',
-      errorMessage: 'Our server encountered an error',
-    });
-  }
-});
-
-router.get('/:idTrip', (req, res) => {
-  const { idTrip } = req.params;
   const query = 'SELECT * FROM Photo WHERE Photo.id_trip = ?';
   try {
-    connection.query(query, [idTrip], (error, results) => {
+    connection.query(query, [id], (error, results) => {
       if (error) {
         res.status(500).json({
           status: 'error',
